@@ -183,15 +183,14 @@
       function initGraph(options, element) {
         options.chart = options.chart || {};
         options.chart.renderTo = element[0];
-        chart = new Highcharts.Chart(options);
-        return chart;
+        return new Highcharts.Chart(options);
       }
 
       // Refresh graph series
       function updateSeries(scope, series) {
-        chart = scope.chart
+        var chart = scope.chart;
         if (chart === undefined || series === undefined) {
-          return
+          return;
         }
         for(var i = 0; i < series.length; i++) {
           if (i >= chart.series.length) {
