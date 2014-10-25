@@ -16,3 +16,4 @@ Vagrant that installs ElasticSearch and the Marvel plugin. Visit `localhost:8080
 ## Links
 
 * [Highcharts Demos](http://www.highcharts.com/demo)
+* [Polaris Papers](http://www.graphics.stanford.edu/projects//polaris/)
