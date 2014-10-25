@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <title>ElasticSearch/Angular Highcharts</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.6/css/foundation.css">
+  <style>
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+  }
+  .h {
+    text-transform: uppercase;
+    font-size: 8pt;
+  }
+  .c {
+    font-size: 16pt;
+    font-weight: bold;
+  }
+  .counters {
+    text-align: center;
+    padding-bottom: 1em;
+  }
+  </style>
+</head>
+<body ng-app="app" ng-controller="controller" ng-cloak>
+
+  <div class="row full-width">
+    <div class="columns large-12">
+      <div class="row">
+        <button class="button tiny" onclick="createStream()">Create Stream</button>
+        <a class="button tiny" href="http://localhost:9200/_plugin/marvel/sense/index.html">Sense</a>
+
+        <div highchart options="highchartOptions" series="histo30d" style="height: 350px"></div>
+
+        <div class="row counters">
+          <div class="columns large-3">
+            <div class="h">past 30 days</div>
+            <div class="c">{{ past30d | currency : '$' : 0 }}</div>
+          </div>
+          <div class="columns large-3">
+            <div class="h">past 60 days</div>
+            <div class="c">{{ past60d | currency : '$' : 0 }}</div>
+          </div>
+          <div class="columns large-3">
+            <div class="h">past 3 months</div>
+            <div class="c">{{ past3M | currency : '$' : 0 }}</div>
+          </div>
+          <div class="columns large-3">
+            <div class="h">past year</div>
+            <div class="c">{{ past1y | currency : '$' : 0 }}</div>
+          </div>
+        </div>
+        <div class="row counters">
+          <div class="columns large-2">
+            <div class="h">30 day growth</div>
+            <div class="c">{{ growth30d | number : 1 }}%</div>
+          </div>
+          <div class="columns large-2">
+            <div class="h">60 day growth</div>
+            <div class="c">{{ growth60d | number : 1 }}%</div>
+          </div>
+          <div class="columns large-2">
+            <div class="h">3 month growth</div>
+            <div class="c">{{ growth3M | number : 1 }}%</div>
+          </div>
+          <div class="columns large-2">
+            <div class="h">6 month growth</div>
+            <div class="c">{{ growth6M | number : 1 }}%</div>
+          </div>
+          <div class="columns large-2">
+            <div class="h">9 month growth</div>
+            <div class="c">{{ growth9M | number : 1 }}%</div>
+          </div>
+          <div class="columns large-2">
+            <div class="h">yearly growth</div>
+            <div class="c">{{ growth1y | number : 1 }}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.4/highcharts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+  <script src="script.js" charset="utf-8"></script>
+  <script src="stream.js"></script>
+  <script src="elasticmetrics.js"></script>
+</body>
+</html>

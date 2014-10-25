@@ -1,0 +1,63 @@
+---
+- hosts: all
+  sudo: yes
+  gather_facts: true
+
+  vars:
+
+    timezone: Europe/Amsterdam
+    locale: en_US.utf8
+
+  tasks:
+
+    - hostname: name=vagrant
+
+    - locale_gen: name={{locale}} state=present
+    - lineinfile: dest=/etc/environment create=yes line=LC_ALL="{{locale}}" regexp=^LC_ALL=
+
+    - name: set /etc/localtime to {{timezone}}
+      file: state=link src=/usr/share/zoneinfo/{{timezone}} path=/etc/localtime force=yes
+
+    - apt: update_cache=yes upgrade=yes cache_valid_time=3600
+
+    - apt: name={{item}}
+      with_items:
+        - nginx
+        - openjdk-7-jdk
+        - python-apt
+
+    - file: path=/etc/nginx/sites-enabled/default state=absent
+
+    - copy: src=public-html dest=/etc/nginx/sites-enabled/public-html
+      notify:
+        - restart nginx
+
+    # http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup-repositories.html
+
+    - apt_key: url=http://packages.elasticsearch.org/GPG-KEY-elasticsearch state=present
+    
+    - apt_repository: repo='deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main' state=present
+
+    - apt: update_cache=yes upgrade=yes cache_valid_time=3600
+
+    - apt: name={{item}}
+      with_items:
+        - elasticsearch
+
+    - command: /usr/share/elasticsearch/bin/plugin -i elasticsearch/marvel/latest
+        creates=/usr/share/elasticsearch/plugins/marvel
+
+    - command: /usr/share/elasticsearch/bin/plugin -i elasticsearch/elasticsearch-cloud-aws/2.3.0
+        creates=/usr/share/elasticsearch/plugins/elasticsearch-cloud-aws
+
+    - lineinfile: 'dest=/etc/elasticsearch/elasticsearch.yml line="marvel.agent.enabled: false" regexp="^marvel.agent.enabled:"'
+      notify:
+        - restart elasticsearch
+
+  handlers:
+
+    - name: restart nginx
+      service: name=nginx state=restarted
+
+    - name: restart elasticsearch
+      service: name=elasticsearch state=restarted
