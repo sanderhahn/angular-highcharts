@@ -10,7 +10,9 @@ Angular directives have a `link` callback and an `$destroy` event. I use these e
 
 ## Baremetrics with ElasticSearch
 
-Vagrant that installs ElasticSearch and the Marvel plugin. Visit `localhost:8080` and press the `Create Stream` button to add some random events. The view is based upon the [Baremetrics.io Net Revenue detail view](https://demo.baremetrics.io/stats/net_revenue).
+Vagrant that installs ElasticSearch and the Marvel plugin. Visit `localhost:8080` and press the `Create Stream` button to add some random events. The view design is based upon the [Baremetrics.io Net Revenue](https://demo.baremetrics.io/stats/net_revenue).
 
 * Stream of events with amounts aggregated in a histogram.
 * Calculates aggregates over periods and percentage changes.
+
+![Revenue Graph](http://sanderhahn.github.io/angular-highcharts/images/revenue.png)
