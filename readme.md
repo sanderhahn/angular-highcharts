@@ -15,4 +15,4 @@ Vagrant that installs ElasticSearch and the Marvel plugin. Visit `localhost:8080
 * Stream of events with amounts aggregated in a histogram.
 * Calculates aggregates over periods and percentage changes.
 
-![Revenue Graph](http://sanderhahn.github.io/angular-highcharts/images/revenue.png)
+![Revenue Graph](http://sanderhahn.github.io/angular-highcharts/images/revenue.png?1)
