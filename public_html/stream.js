@@ -47,7 +47,7 @@
         timestamp: new Date(timestamp).toISOString(),
         event: 'charge',
         amount: random(1240) + 10,
-        client_id: random(300) + 1,
+        customer_id: random(300) + 1,
       });
     }
 
@@ -59,7 +59,7 @@
         timestamp: new Date(timestamp).toISOString(),
         event: 'chargeback',
         amount: -pick.amount,
-        client_id: pick.client_id
+        customer_id: pick.customer_id
       });
     }
 
@@ -71,7 +71,7 @@
         timestamp: new Date(timestamp).toISOString(),
         event: 'failedcharge',
         amount: pick.amount,
-        client_id: pick.client_id
+        customer_id: pick.customer_id
       });
     }
 
@@ -83,7 +83,7 @@
         timestamp: new Date(timestamp).toISOString(),
         event: 'refund',
         amount: -pick.amount,
-        client_id: pick.client_id
+        customer_id: pick.customer_id
       });
     }
 
