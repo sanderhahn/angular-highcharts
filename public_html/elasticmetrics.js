@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  window.termCondition = function (field, value) {
+  var termCondition = function (field, value) {
     var condition = {};
     condition[field] = value;
     return {
@@ -9,7 +9,7 @@
     };
   };
 
-  window.rangeFromTo = function (field, from, to) {
+  var rangeFromTo = function (field, from, to) {
     var condition = {};
     condition[field] = {
       from: from,
@@ -20,13 +20,13 @@
     };
   };
 
-  window.andFilter = function (ands) {
+  var andFilter = function (ands) {
     return {
       and: ands
     };
   };
 
-  window.aggregate = function (field, agg) {
+  var aggregate = function (field, agg) {
     var name = [agg, field].join('_');
     var fieldAggregate = {};
     fieldAggregate[agg] = {
@@ -35,14 +35,14 @@
     return fieldAggregate;
   };
 
-  window.filterAggregate = function (filter, aggs) {
+  var filterAggregate = function (filter, aggs) {
     return {
       filter: filter,
       aggs: aggs
     };
   };
 
-  window.dateHistogramAggregate = function (field, interval, aggs) {
+  var dateHistogramAggregate = function (field, interval, aggs) {
     return {
       date_histogram: {
         field: field,
@@ -54,7 +54,7 @@
   };
 
   var periods = '30d 60d 3M 6M 9M 1y'.split(' ');
-  window.periodsAggregates = function (aggs) {
+  var periodsAggregates = function (aggs) {
     var _aggs = {};
     for(var i = 0; i < periods.length; i++) {
       var period = periods[i];
@@ -66,7 +66,7 @@
     return _aggs;
   };
 
-  window.detailQuery = function (event) {
+  var detailQuery = function (event) {
     var amountAggregate = {
       amount: aggregate('amount', 'sum')
     };
