@@ -19,10 +19,6 @@
         title: {
           text: 'Revenue'
         },
-        // xAxis: {
-        //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        //     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        // },
         xAxis: {
           type: 'datetime'
         },
@@ -63,7 +59,7 @@
         },
         series: [{
           type: 'area',
-          name: 'Amount',
+          name: 'Revenue',
           data: []
         }]
       };
@@ -74,7 +70,7 @@
             $scope[i] = counters[i];
           }
         }
-      })
+      });
 
     })
 
